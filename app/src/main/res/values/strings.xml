@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">BADAIR</string>
+    <string name="bad_air_detector">Bad Air Detector</string>
+    <string name="mapa_aqui">Mapa aqui</string>
+    <string name="fortaleza">Fortaleza</string>
+    <string name="pesquise_cidade">Pesquise Cidade</string>
+    <string name="n_vel_de_aqi">Nível de AQI</string>
+    <string name="aqitest">50</string>
+    <string name="agrad_vel">Agradável</string>
+    <string name="game_aqui">Game aqui</string>
 </resources>

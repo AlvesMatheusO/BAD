@@ -1,65 +1,27 @@
 package com.workspace.badairdetector
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.appcompat.app.AppCompatActivity
+import com.workspace.badair.CityInfoActivity
+import com.workspace.badair.GameActivity
 import com.workspace.badair.R
-import com.workspace.badair.models.Cities
-import com.workspace.badair.adapters.CityListAdapter
-import com.workspace.badairdetector.service.RequestService
-import kotlinx.android.synthetic.main.activity_city.*
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import kotlinx.android.synthetic.main.activity_list_city.*
 
 class ListCityActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_city)
+        setContentView(R.layout.activity_list_city)
 
-
-        val okHttpClient = OkHttpClient.Builder()
-            .addInterceptor(HttpLoggingInterceptor().apply {
-                level = HttpLoggingInterceptor.Level.BODY
-            })
-            .build()
-
-        val retrofit = Retrofit.Builder()
-            .client(okHttpClient)
-            .baseUrl("https://api.airvisual.com/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-        val requestService = retrofit.create((RequestService::class.java))
-
-        requestService.listCity().enqueue(object : Callback<Cities> {
-            override fun onFailure(call: Call<Cities>, t: Throwable) {
-                Toast.makeText(this@ListCityActivity, t.localizedMessage, Toast.LENGTH_LONG)
-                    .show()
-            }
-
-            override fun onResponse(call: Call<Cities>, response: Response<Cities>) {
-                showData(response.body()!!)
-            }
-
-
-        })
-
-    }
-
-    private fun showData(cities: Cities) {
-
-        recyclerView.apply {
-            layoutManager = LinearLayoutManager(this@ListCityActivity)
-
-            adapter = CityListAdapter(cities)
+        cidade_example.setOnClickListener {
+            startActivity(Intent(this, CityInfoActivity::class.java))
         }
-    }
 
+        icon_game.setOnClickListener {
+            startActivity(Intent(this, GameActivity::class.java))
+        }
+
+
+    }
 }
